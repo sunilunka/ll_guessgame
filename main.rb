@@ -13,10 +13,6 @@
      'incorrect' => 0 
   }
 }
-@pOne_name = @players[:pOne]['name']
-@apOne_name = @players[:pTwo]['name']
-@one_score = @players[:pOne]['lives'] 
-@two_score = @players[:pTwo]['lives']
 
 @ap = true
 
@@ -44,29 +40,42 @@ def get_names
 end
 
 def active_player
-  player = @ap ? @pOne_name : @pTwo_name
+  player = @ap ? @players[:pOne] : @players[:pTwo]
   return player
 end
 
+def assess_answer(player, answer)
+  correct = @numbers[2]
+  if answer == correct
+    player['correct'] += 1
+    puts "#{player['name']} score is #{player['correct']}"
+  elsif answer != correct
+    player['lives'] -= 1
+    puts "That's incorrect"
+    puts "#{@players[:pOne]['name']} has #{@players[:pOne]['lives']}"
+    puts "#{@players[:pTwo]['name']} has #{@players[:pTwo]['lives']}"
+   end
+end
+
 def get_answer(player)
-  puts "#{player} what is #{@numbers[0]} plus #{@numbers[1]}?"
+  puts "#{player['name']} what is #{@numbers[0]} plus #{@numbers[1]}?"
   answer = gets.chomp
   if (/[^[:digit:]]+/.match(answer).nil?)
     ans_num = answer.to_i
+    assess_answer(player, ans_num)
     puts "#{ans_num}"
   elsif !(/[^[:digit:]]+/.match(answer).nil?)
-    puts "Sorry that is not a number."
-    exit
+    puts "Sorry that is not a number. Try solving this one with numbers!"
+    question_engine(player)
   end
 end  
 
-def 
 
 def question_engine(player)
-  while (@one_score > 0 && @two_score > 0)
+  while (@players[:pOne]['lives'] > 0 && @players[:pTwo]['lives'] > 0)
     question_generator
     get_answer(active_player)
-    @one_score = 0
+    @one_lives = 0
   end
 end
 
