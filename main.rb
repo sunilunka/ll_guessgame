@@ -13,14 +13,22 @@
      'incorrect' => 0 
   }
 }
+@pOne_name = @players[:pOne]['name']
+@apOne_name = @players[:pTwo]['name']
+@one_score = @players[:pOne]['lives'] 
+@two_score = @players[:pTwo]['lives']
 
 @ap = true
 
+@numbers = []
+
 def question_generator
-  @x = rand(20)
-  @y = rand(20)
-  @z = @x + @y
-  puts "#{@z}"
+  x = rand(20)
+  y = rand(20)
+  z = x + y
+  @numbers << x
+  @numbers << y
+  @numbers << z
 end
 
 def get_names
@@ -36,14 +44,21 @@ def get_names
 end
 
 def active_player
-  player = @ap ? @players[:pOne]['name'] : @players[:pTwo]['name']
-  puts "#{player}"
+  player = @ap ? @pOne_name : @pTwo_name
+  return player
 end
 
-def question_engine
+
+
+def question_engine(player)
+  while (@one_score > 0 && @two_score > 0)
+    question_generator
+    puts "#{player} what is #{@numbers[0]} plus #{@numbers[1]}?"
+    @one_score = 0
+  end
 end
 
-get_names
+#get_names
 
-#active_player
-#question_generator
+active_player
+question_engine(active_player)
