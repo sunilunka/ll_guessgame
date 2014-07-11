@@ -47,6 +47,7 @@ def assess_answer(player, answer)
     puts "#{@players[:pTwo]['name']} has:" 
     puts "#{@players[:pTwo]['lives']} lives remaining,"
     puts "And a score of #{@players[:pTwo]['correct']}"
+    puts
    end
 end
 
@@ -54,9 +55,11 @@ def get_answer(player)
   puts "#{player['name']} what is #{@numbers[0]} plus #{@numbers[1]}?"
   answer = gets.chomp
   if (/[^[:digit:]]+/.match(answer).nil?)
+    puts
     ans_num = answer.to_i
     assess_answer(player, ans_num)
   elsif !(/[^[:digit:]]+/.match(answer).nil?)
+    puts
     puts "Sorry that is not a number. Try solving this one with numbers!"
     question_engine(player)
   end
