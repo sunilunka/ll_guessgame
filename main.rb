@@ -48,12 +48,15 @@ def active_player
   return player
 end
 
+def get_answer(player)
+  puts "#{player} what is #{@numbers[0]} plus #{@numbers[1]}?"
+end  
 
 
 def question_engine(player)
   while (@one_score > 0 && @two_score > 0)
     question_generator
-    puts "#{player} what is #{@numbers[0]} plus #{@numbers[1]}?"
+    get_answer(active_player)
     @one_score = 0
   end
 end
