@@ -13,4 +13,11 @@ players = {
 }
 
 
-puts "#{players[:pTwo]['correct']}"
+def question_generator
+  @x = rand(20)
+  @y = rand(20)
+  @z = @x + @y
+  puts "#{@z}"
+end
+
+question_generator
