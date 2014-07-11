@@ -50,8 +50,17 @@ end
 
 def get_answer(player)
   puts "#{player} what is #{@numbers[0]} plus #{@numbers[1]}?"
+  answer = gets.chomp
+  if (/[^[:digit:]]+/.match(answer).nil?)
+    ans_num = answer.to_i
+    puts "#{ans_num}"
+  elsif !(/[^[:digit:]]+/.match(answer).nil?)
+    puts "Sorry that is not a number."
+    exit
+  end
 end  
 
+def 
 
 def question_engine(player)
   while (@one_score > 0 && @two_score > 0)
